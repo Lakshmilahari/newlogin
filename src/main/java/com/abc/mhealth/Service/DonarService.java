@@ -1,5 +1,5 @@
 package com.abc.mhealth.Service;
 
-public interface DonarInterface {
+public interface DonarService {
 
 }
