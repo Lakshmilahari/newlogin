@@ -41,7 +41,7 @@ public class AdminServiceImpl implements AdminService {
 		if(optionalAccount.isPresent()) {
 			throw new DuplicateEntryException("Account already exists with Account number :"+doctor.getDoctorId());
 		}
-		doctorRepository.save(doctor);
+		doctorRepository.saveAll(doctor);
 		
 	}
 

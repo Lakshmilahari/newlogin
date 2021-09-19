@@ -8,5 +8,5 @@ import com.abc.mhealth.entity.Doctor;
 public interface DoctorRepository extends JpaRepository<Admin,Integer>{
 
 //	void save(Doctor doctor);
-
+	
 }
