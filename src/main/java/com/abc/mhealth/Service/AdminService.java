@@ -8,6 +8,8 @@ import com.abc.mhealth.entity.Nurse;
 
 public interface AdminService {
 	
+	public void saveAdmin(Admin admin);
+	
 	public void doLogin(Admin admin);
 	
 	public void addDoctor(Doctor doctor);

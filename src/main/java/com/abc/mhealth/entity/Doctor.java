@@ -10,27 +10,27 @@ import javax.validation.constraints.NotNull;
 @Table(name="doctor_tbl")
 public class Doctor {
 	
-//	@NotNull(message = "Doctor id is required")
+	@NotNull(message = "Doctor id is required")
 	@Id
-	private long doctorId;
+	private int doctorId;
 	
-//	@NotNull(message = "Doctor experience is required")
+	@NotNull(message = "Doctor experience is required")
 	@Column(name="experience")
 	private int experience;
 	
-//	@NotNull(message = "Doctor Specialty is required")
+	@NotNull(message = "Doctor Specialty is required")
 	@Column(name="Specialty")
 	private String Specialty;
 	
-//	@NotNull(message = "Doctor consultationPrice is required")
+	@NotNull(message = "Doctor consultationPrice is required")
 	@Column(name="consultationPrice")
 	private double consultationPrice;
 	
-//	@NotNull(message = "Doctor contactNumber is required")
+	@NotNull(message = "Doctor contactNumber is required")
 	@Column(name="contactNumber")
-	private long contactNumber;
+	private int contactNumber;
 	
-//	@NotNull(message = "Doctor modeOfConsultation is required")
+	@NotNull(message = "Doctor modeOfConsultation is required")
 	@Column(name="modeOfConsultation")
 	private String modeOfConsultation;
 	
@@ -38,7 +38,7 @@ public class Doctor {
 	public long getDoctorId() {
 		return doctorId;
 	}
-	public void setDoctorId(long doctorId) {
+	public void setDoctorId(int doctorId) {
 		this.doctorId = doctorId;
 	}
 	public int getExperience() {
@@ -62,7 +62,7 @@ public class Doctor {
 	public long getContactNumber() {
 		return contactNumber;
 	}
-	public void setContactNumber(long contactNumber) {
+	public void setContactNumber(int contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 	public String getModeOfConsultation() {

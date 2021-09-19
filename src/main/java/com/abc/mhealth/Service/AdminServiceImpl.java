@@ -71,4 +71,10 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	@Override
+	public void saveAdmin(Admin admin) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

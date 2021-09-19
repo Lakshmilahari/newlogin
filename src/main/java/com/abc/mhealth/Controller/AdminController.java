@@ -36,15 +36,17 @@ public class AdminController {
 		return new ResponseEntity<>("Succcessful Login : "+admin.getAdminEmail(),HttpStatus.OK);
 		
 	}
+	@PostMapping("/save")
+	public ResponseEntity<String> saveAccount(@Valid @RequestBody Admin admin) {
+		adminService.saveAdmin(admin);
+		return new ResponseEntity<>("Account saved successfully with accno = " + admin.getAdminEmail(),HttpStatus.CREATED);
+	}
 	
-//	@Autowired
-//	private DoctorService doctorService;
-	
-	 
+
 	@PostMapping("/addDoctor")
 	public ResponseEntity<String> addDoctor(@Valid @RequestBody Doctor doctor) {
 		adminService.addDoctor(doctor);
-		return new ResponseEntity<>("Account saved successfully with accno = " + doctor.getDoctorId(),HttpStatus.CREATED);
+		return new ResponseEntity<>("Doctor added successfully with id = " + doctor.getDoctorId(),HttpStatus.CREATED);
 	}
 
 }
