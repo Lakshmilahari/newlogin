@@ -4,73 +4,95 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="doctor_tbl")
 public class Doctor {
 	
-	@NotNull(message = "Doctor id is required")
 	@Id
 	private int doctorId;
 	
-	@NotNull(message = "Doctor experience is required")
-	@Column(name="experience")
+	@Column(name="name" , nullable = false)
+//	@NotEmpty(message="Name is Required")
+	private String name;
+	
+	@Column(name="experience" , nullable = false)
+//	@NotEmpty(message="experience is Required")
 	private int experience;
 	
-	@NotNull(message = "Doctor Specialty is required")
-	@Column(name="Specialty")
+	@Column(name="Specialty" , nullable = false)
+//	@NotEmpty(message="Specialty is Required")
 	private String Specialty;
 	
-	@NotNull(message = "Doctor consultationPrice is required")
-	@Column(name="consultationPrice")
-	private double consultationPrice;
+	@Column(name="consultationPrice" , nullable = false)
+//	@NotEmpty(message="consultationPrice is Required")
+	private int consultationPrice;
 	
-	@NotNull(message = "Doctor contactNumber is required")
-	@Column(name="contactNumber")
+	@Column(name="contactNumber" , nullable = false)
+//	@NotEmpty(message="contactNumber is Required")
 	private int contactNumber;
 	
-	@NotNull(message = "Doctor modeOfConsultation is required")
-	@Column(name="modeOfConsultation")
+	@Column(name="modeOfConsultation" , nullable = false)
+//	@NotEmpty(message="modeOfConsultation is Required")
 	private String modeOfConsultation;
-	
-	
-	public long getDoctorId() {
+
+	public int getDoctorId() {
 		return doctorId;
 	}
+
 	public void setDoctorId(int doctorId) {
 		this.doctorId = doctorId;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getExperience() {
 		return experience;
 	}
+
 	public void setExperience(int experience) {
 		this.experience = experience;
 	}
+
 	public String getSpecialty() {
 		return Specialty;
 	}
+
 	public void setSpecialty(String specialty) {
 		Specialty = specialty;
 	}
+
 	public double getConsultationPrice() {
 		return consultationPrice;
 	}
-	public void setConsultationPrice(double consultationPrice) {
+
+	public void setConsultationPrice(int consultationPrice) {
 		this.consultationPrice = consultationPrice;
 	}
-	public long getContactNumber() {
+
+	public double getContactNumber() {
 		return contactNumber;
 	}
+
 	public void setContactNumber(int contactNumber) {
 		this.contactNumber = contactNumber;
 	}
+
 	public String getModeOfConsultation() {
 		return modeOfConsultation;
 	}
+
 	public void setModeOfConsultation(String modeOfConsultation) {
 		this.modeOfConsultation = modeOfConsultation;
 	}
+	
 	
 	
 	

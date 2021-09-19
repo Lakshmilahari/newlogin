@@ -24,8 +24,8 @@ public class AdminController {
 	@PostMapping("/login")
 	public ResponseEntity<Object> doLogin(@Valid @RequestBody Admin admin){
 		
-		boolean r1 = admin.getAdminEmail().equals("admin@email.com");
-		boolean r2 = admin.getAdminPassword().equals("adminpassword");
+		boolean r1 = admin.getEmail().equals("admin@email.com");
+		boolean r2 = admin.getPassword().equals("adminpassword");
 		int res=0;
 		if(r1 && r2) {
 			res ++;
@@ -33,13 +33,13 @@ public class AdminController {
 		if(res!=1) {
 			return new ResponseEntity<>("Wrong Details",HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>("Succcessful Login : "+admin.getAdminEmail(),HttpStatus.OK);
+		return new ResponseEntity<>("Succcessful Login : "+admin.getAdminId(),HttpStatus.OK);
 		
 	}
 	@PostMapping("/save")
 	public ResponseEntity<String> saveAccount(@Valid @RequestBody Admin admin) {
 		adminService.saveAdmin(admin);
-		return new ResponseEntity<>("Account saved successfully with accno = " + admin.getAdminEmail(),HttpStatus.CREATED);
+		return new ResponseEntity<>("Account saved successfully with accno = " + admin.getAdminId(),HttpStatus.CREATED);
 	}
 	
 
