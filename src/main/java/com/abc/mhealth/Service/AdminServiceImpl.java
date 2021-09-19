@@ -34,16 +34,23 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private DoctorRepository doctorRepository;
 
+	
+	
 	@Override
 	public void addDoctor(Doctor doctor) {
 		// TODO Auto-generated method stub
-		Optional<Admin> optionalAccount = doctorRepository.findById(doctor.getDoctorId());
-		if(optionalAccount.isPresent()) {
-			throw new DuplicateEntryException("Account already exists with Account number :"+doctor.getDoctorId());
-		}
-		doctorRepository.saveAll(doctor);
 		
 	}
+//	@Override
+////	public void addDoctor(Doctor doctor) {
+////		// TODO Auto-generated method stub
+////		Optional<Admin> optionalAccount = doctorRepository.findById(doctor.getDoctorId());
+////		if(optionalAccount.isPresent()) {
+////			throw new DuplicateEntryException("Account already exists with Account number :"+doctor.getDoctorId());
+////		}
+////		doctorRepository.saveAll(doctor);
+////		
+////	}
 
 	@Override
 	public void updateAccountDoctor(Doctor doctor) {
@@ -98,6 +105,8 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 		
 	}
