@@ -1,9 +1,14 @@
 package com.abc.mhealth.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.abc.mhealth.Repository.UserRepository;
+import com.abc.mhealth.Service.UserService;
+import com.abc.mhealth.entity.Center;
+import com.abc.mhealth.entity.DoctorAppointment;
 import com.abc.mhealth.entity.Status;
 import com.abc.mhealth.entity.User;
 
@@ -11,11 +16,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/users/register")
+    @PostMapping("/register")
     public Status registerUser(@Valid @RequestBody User newUser) {
         List<User> users = userRepository.findAll();
 
@@ -34,7 +40,7 @@ public class UserController {
         return Status.SUCCESS;
     }
 
-    @PostMapping("/users/login")
+    @PostMapping("/login")
     public Status loginUser(@Valid @RequestBody User user) {
         List<User> users = userRepository.findAll();
 
@@ -49,7 +55,7 @@ public class UserController {
         return Status.FAILURE;
     }
 
-    @PostMapping("/users/logout")
+    @PostMapping("/logout")
     public Status logUserOut(@Valid @RequestBody User user) {
         List<User> users = userRepository.findAll();
 
@@ -64,9 +70,20 @@ public class UserController {
         return Status.FAILURE;
     }
 
-    @DeleteMapping("/users/all")
+    @DeleteMapping("/all")
     public Status deleteUsers() {
         userRepository.deleteAll();
         return Status.SUCCESS;
     }
+    
+    @Autowired
+    private UserService userService;
+    
+    @PostMapping("/doctorAppointment")
+	public ResponseEntity<String> addCenter(@Valid @RequestBody DoctorAppointment doctorAppointment) {
+		userService.doctorAppointment(doctorAppointment);
+		return new ResponseEntity<>("Appointment booked successfully with doctor(with ID) = " + doctorAppointment.getDoctorId() +"on "+doctorAppointment.getAppDate()+" at "+doctorAppointment.getTime(),HttpStatus.CREATED);
+	}
+    
+    
 }

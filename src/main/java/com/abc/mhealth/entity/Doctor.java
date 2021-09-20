@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="doctor_tbl")
@@ -19,8 +18,8 @@ public class Doctor {
 	@Column(name="experience" , nullable = false)
 	private int experience;
 	
-//	@Column(name="Specialty" , nullable = false)
-//	private String Specialty;
+	@Column(name="Specialty" , nullable = false)
+	private String specialty;
 	
 	@Column(name="consultationPrice" , nullable = false)
 	private int consultationPrice;
@@ -55,13 +54,13 @@ public class Doctor {
 		this.experience = experience;
 	}
 
-//	public String getSpecialty() {
-//		return Specialty;
-//	}
-//
-//	public void setSpecialty(String specialty) {
-//		Specialty = specialty;
-//	}
+	public String getSpecialty() {
+		return specialty;
+	}
+
+	public void setSpecialty(String specialty) {
+		this.specialty = specialty;
+	}
 
 	public double getConsultationPrice() {
 		return consultationPrice;

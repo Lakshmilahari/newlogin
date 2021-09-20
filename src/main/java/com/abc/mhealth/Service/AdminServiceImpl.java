@@ -39,7 +39,7 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public void addDoctor(Doctor doctor) {
+	public void addDoctor(Doctor doctor) throws  DuplicateEntryException{
 		// TODO Auto-generated method stub
 		Optional<Doctor> optionalAccount = doctorRepository.findById(doctor.getDoctorId());
 		if(optionalAccount.isPresent()) {
@@ -76,7 +76,7 @@ public class AdminServiceImpl implements AdminService {
 	private NurseRepository nurseRepository;
 
 	@Override
-	public void addNurse(Nurse nurse) {
+	public void addNurse(Nurse nurse) throws  DuplicateEntryException{
 		// TODO Auto-generated method stub
 		Optional<Nurse> optionalAccount = nurseRepository.findById(nurse.getNurseId());
 		if(optionalAccount.isPresent()) {
@@ -114,7 +114,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	
 	@Override
-	public void addCenter(Center center) {
+	public void addCenter(Center center) throws  DuplicateEntryException{
 		// TODO Auto-generated method stub
 		Optional<Center> optionalAccount = centerRepository.findById(center.getCenterId());
 		if(optionalAccount.isPresent()) {
