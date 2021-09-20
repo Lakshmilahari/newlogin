@@ -14,27 +14,21 @@ public class Doctor {
 	private int doctorId;
 	
 	@Column(name="name" , nullable = false)
-//	@NotEmpty(message="Name is Required")
 	private String name;
 	
 	@Column(name="experience" , nullable = false)
-//	@NotEmpty(message="experience is Required")
 	private int experience;
 	
-	@Column(name="Specialty" , nullable = false)
-//	@NotEmpty(message="Specialty is Required")
-	private String Specialty;
+//	@Column(name="Specialty" , nullable = false)
+//	private String Specialty;
 	
 	@Column(name="consultationPrice" , nullable = false)
-//	@NotEmpty(message="consultationPrice is Required")
 	private int consultationPrice;
 	
 	@Column(name="contactNumber" , nullable = false)
-//	@NotEmpty(message="contactNumber is Required")
 	private int contactNumber;
 	
 	@Column(name="modeOfConsultation" , nullable = false)
-//	@NotEmpty(message="modeOfConsultation is Required")
 	private String modeOfConsultation;
 
 	public int getDoctorId() {
@@ -61,13 +55,13 @@ public class Doctor {
 		this.experience = experience;
 	}
 
-	public String getSpecialty() {
-		return Specialty;
-	}
-
-	public void setSpecialty(String specialty) {
-		Specialty = specialty;
-	}
+//	public String getSpecialty() {
+//		return Specialty;
+//	}
+//
+//	public void setSpecialty(String specialty) {
+//		Specialty = specialty;
+//	}
 
 	public double getConsultationPrice() {
 		return consultationPrice;

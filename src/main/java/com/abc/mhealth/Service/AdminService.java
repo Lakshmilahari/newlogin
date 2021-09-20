@@ -10,8 +10,6 @@ public interface AdminService {
 	
 	public void saveAdmin(Admin admin);
 	
-	public void doLogin(Admin admin);
-	
 	public void addDoctor(Doctor doctor);
 	
 	public void updateAccountDoctor(Doctor doctor);

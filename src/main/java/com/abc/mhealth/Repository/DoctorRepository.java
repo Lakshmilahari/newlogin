@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.abc.mhealth.entity.Admin;
 import com.abc.mhealth.entity.Doctor;
 
-public interface DoctorRepository extends JpaRepository<Admin,Integer>{
+public interface DoctorRepository extends JpaRepository<Doctor,Integer>{
 
 //	void save(Doctor doctor);
 	
