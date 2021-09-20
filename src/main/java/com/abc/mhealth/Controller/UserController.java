@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import com.abc.mhealth.Repository.UserRepository;
 import com.abc.mhealth.Service.UserService;
 import com.abc.mhealth.entity.Center;
+import com.abc.mhealth.entity.Doctor;
 import com.abc.mhealth.entity.DoctorAppointment;
+import com.abc.mhealth.entity.Nurse;
 import com.abc.mhealth.entity.Status;
 import com.abc.mhealth.entity.User;
 
@@ -83,6 +85,31 @@ public class UserController {
 	public ResponseEntity<String> addCenter(@Valid @RequestBody DoctorAppointment doctorAppointment) {
 		userService.doctorAppointment(doctorAppointment);
 		return new ResponseEntity<>("Appointment booked successfully with doctor(with ID) = " + doctorAppointment.getDoctorId() +"on "+doctorAppointment.getAppDate()+" at "+doctorAppointment.getTime(),HttpStatus.CREATED);
+	}
+    
+  
+	@GetMapping("/alldoctor")
+	public ResponseEntity<List<Doctor>> getAllDoctors(){
+		List<Doctor> doctors= userService.searchAllDoctor();
+		return new ResponseEntity<>(doctors,HttpStatus.OK);
+	}
+	
+	@GetMapping("/get/{id}")
+	public ResponseEntity<Doctor> getAccountDetails(@PathVariable("id") int doctorId) {
+		Doctor doctor = userService.searchDoctorById(doctorId);
+		return new ResponseEntity<>(doctor,HttpStatus.OK);
+	}
+	
+	@GetMapping("/allnurse")
+	public ResponseEntity<List<Nurse>> getAllNurse(){
+		List<Nurse> nurses= userService.searchAllNurse();
+		return new ResponseEntity<>(nurses,HttpStatus.OK);
+	}
+	
+	@GetMapping("/getnurse/{id}")
+	public ResponseEntity<Nurse> getNurseDetails(@PathVariable("id") int nurseId) {
+		Nurse nurse = userService.searchNurseById(nurseId);
+		return new ResponseEntity<>(nurse,HttpStatus.OK);
 	}
     
     
