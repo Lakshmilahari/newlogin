@@ -1,116 +1,54 @@
 package com.abc.mhealth.Controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.abc.mhealth.Repository.UserRepository;
-import com.abc.mhealth.Service.UserService;
-import com.abc.mhealth.entity.Center;
-import com.abc.mhealth.entity.Doctor;
-import com.abc.mhealth.entity.DoctorAppointment;
-import com.abc.mhealth.entity.Nurse;
-import com.abc.mhealth.entity.Status;
 import com.abc.mhealth.entity.User;
+import com.abc.mhealth.payload.LoginPayload;
+import com.abc.mhealth.Service.UserService;
 
-import javax.validation.Valid;
-import java.util.List;
+
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
-    @Autowired
-    UserRepository userRepository;
-
-    @PostMapping("/register")
-    public Status registerUser(@Valid @RequestBody User newUser) {
-        List<User> users = userRepository.findAll();
-
-        System.out.println("New user: " + newUser.toString());
-
-        for (User user : users) {
-            System.out.println("Registered user: " + newUser.toString());
-
-            if (user.equals(newUser)) {
-                System.out.println("User Already exists!");
-                return Status.USER_ALREADY_EXISTS;
-            }
-        }
-
-        userRepository.save(newUser);
-        return Status.SUCCESS;
-    }
-
-    @PostMapping("/login")
-    public Status loginUser(@Valid @RequestBody User user) {
-        List<User> users = userRepository.findAll();
-
-        for (User other : users) {
-            if (other.equals(user)) {
-                user.setLoggedIn(true);
-                userRepository.save(user);
-                return Status.SUCCESS;
-            }
-        }
-
-        return Status.FAILURE;
-    }
-
-    @PostMapping("/logout")
-    public Status logUserOut(@Valid @RequestBody User user) {
-        List<User> users = userRepository.findAll();
-
-        for (User other : users) {
-            if (other.equals(user)) {
-                user.setLoggedIn(false);
-                userRepository.save(user);
-                return Status.SUCCESS;
-            }
-        }
-
-        return Status.FAILURE;
-    }
-
-    @DeleteMapping("/all")
-    public Status deleteUsers() {
-        userRepository.deleteAll();
-        return Status.SUCCESS;
-    }
-    
-    @Autowired
-    private UserService userService;
-    
-    @PostMapping("/doctorAppointment")
-	public ResponseEntity<String> addCenter(@Valid @RequestBody DoctorAppointment doctorAppointment) {
-		userService.doctorAppointment(doctorAppointment);
-		return new ResponseEntity<>("Appointment booked successfully with doctor(with ID) = " + doctorAppointment.getDoctorId() +"on "+doctorAppointment.getAppDate()+" at "+doctorAppointment.getTime(),HttpStatus.CREATED);
-	}
-    
-  
-	@GetMapping("/alldoctor")
-	public ResponseEntity<List<Doctor>> getAllDoctors(){
-		List<Doctor> doctors= userService.searchAllDoctor();
-		return new ResponseEntity<>(doctors,HttpStatus.OK);
+	@Autowired
+	private UserService userService;
+	
+	
+	
+	@PostMapping("/sregister")
+	public ResponseEntity<String> register(@Valid @RequestBody User USER) {
+		User user = userService.registerUser(USER);
+		return new ResponseEntity<>("Registered Successfully: " +user.getEmail(),HttpStatus.CREATED);
+		
 	}
 	
-	@GetMapping("/get/{id}")
-	public ResponseEntity<Doctor> getAccountDetails(@PathVariable("id") int doctorId) {
-		Doctor doctor = userService.searchDoctorById(doctorId);
-		return new ResponseEntity<>(doctor,HttpStatus.OK);
+
+	@PostMapping("/login")
+	
+	    public ResponseEntity<String> login(@Valid @RequestBody LoginPayload loginPayload){
+		
+		User user = userService.login(loginPayload.getEmail(),loginPayload.getPassword());
+		return new ResponseEntity<>("LoggedIn Successfully: " +user.getEmail() + "  , login: "+ user.isLoggedIn(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/allnurse")
-	public ResponseEntity<List<Nurse>> getAllNurse(){
-		List<Nurse> nurses= userService.searchAllNurse();
-		return new ResponseEntity<>(nurses,HttpStatus.OK);
-	}
 	
-	@GetMapping("/getnurse/{id}")
-	public ResponseEntity<Nurse> getNurseDetails(@PathVariable("id") int nurseId) {
-		Nurse nurse = userService.searchNurseById(nurseId);
-		return new ResponseEntity<>(nurse,HttpStatus.OK);
-	}
-    
-    
+	@PostMapping("/logout/{email}")
+	
+    public ResponseEntity<String> logout(@Valid @PathVariable("email") String email){
+	User user = userService.logout(email);	
+	return new ResponseEntity<>("LoggedOut Successfully: " +user.getEmail(), HttpStatus.OK);
+}
+
+	
 }
