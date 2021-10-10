@@ -15,23 +15,23 @@ public class UserServiceImpl implements UserService {
 	
 	
 	@Autowired
-	private UserRepository USERRep;
+	private UserRepository userssRep;
 	
 	
 
 	@Override
-	public User registerUser(User USER) {
-		User optionalAccount = USERRep.findByEmail(USER.getEmail());
+	public User registerUser(User userss) {
+		User optionalAccount = userssRep.findByEmail(userss.getEmail());
 		if(optionalAccount!=null) {
-			throw new ResourceAlreadyExistingException("Account already existing with email;" +USER.getEmail());
+			throw new ResourceAlreadyExistingException("Account already existing with email;" +userss.getEmail());
 		}
-		return USERRep.save(USER);
+		return userssRep.save(userss);
 		
 	}
 	
 	@Override
 	public User login(String email, String password) {
-		User user = USERRep.login(email,password);
+		User user = userssRep.login(email,password);
 		if(user == null) {
 			throw new AuthenticationFailureException("email or password incorrect");
 		}else {
@@ -43,14 +43,14 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User logout(String email) {
-		User user = USERRep.findByEmail(email);
+		User user = userssRep.findByEmail(email);
 		if(user==null) {
 			throw new ResourceNotFoundException("email not existing");
 			
 		}
 		else if(user.isLoggedIn()==true) {
 			user.setLoggedIn(false);
-			USERRep.save(user);
+			userssRep.save(user);
 		}
 		return user;
 	}

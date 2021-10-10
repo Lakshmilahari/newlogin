@@ -7,7 +7,7 @@ import com.abc.mhealth.entity.User;
 
 public interface UserService  {
 
-	public User registerUser(User USER);
+	public User registerUser(User userss);
 
 	public User login(String email, String password);
 

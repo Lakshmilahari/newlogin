@@ -20,6 +20,8 @@ import com.abc.mhealth.Service.UserService;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:3000")
+
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -27,8 +29,8 @@ public class UserController {
 	
 	
 	@PostMapping("/sregister")
-	public ResponseEntity<String> register(@Valid @RequestBody User USER) {
-		User user = userService.registerUser(USER);
+	public ResponseEntity<String> register(@Valid @RequestBody User userss) {
+		User user = userService.registerUser(userss);
 		return new ResponseEntity<>("Registered Successfully: " +user.getEmail(),HttpStatus.CREATED);
 		
 	}
