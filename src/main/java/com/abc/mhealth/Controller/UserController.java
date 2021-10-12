@@ -22,6 +22,7 @@ import com.abc.mhealth.Service.UserService;
 @RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:3000")
 
+
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -38,10 +39,11 @@ public class UserController {
 
 	@PostMapping("/login")
 	
-	    public ResponseEntity<String> login(@Valid @RequestBody LoginPayload loginPayload){
+	    public ResponseEntity<User> login(@Valid @RequestBody LoginPayload loginPayload){
 		
 		User user = userService.login(loginPayload.getEmail(),loginPayload.getPassword());
-		return new ResponseEntity<>("LoggedIn Successfully: " +user.getEmail() + "  , login: "+ user.isLoggedIn(), HttpStatus.OK);
+		//return new ResponseEntity<>("LoggedIn Successfully: " +user.getEmail() + "  , login: "+ user.isLoggedIn(), HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	
